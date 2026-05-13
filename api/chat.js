@@ -10,7 +10,7 @@ export default async function handler(req, res) {
   if (!apiKey) return res.status(500).json({ error: 'API key not configured' });
 
   try {
-    const body = { ...req.body, model: 'claude-instant-1-2' };
+    const body = { ...req.body, model: 'claude-3-haiku-20240307' };
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
