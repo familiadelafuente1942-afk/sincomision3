@@ -138,12 +138,12 @@ function EstadoDot({estado}) {
 
 async function callIA(messages, system) {
   try {
-  const res = await fetch("/api/chat",{
-  method:"POST", headers:{"Content-Type":"application/json"},
-  body:JSON.stringify({max_tokens:1000,system,messages}),});
+    const res = await fetch("/api/chat",{
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({system,messages}),
+    });
     const data = await res.json();
-    if(data.error) return "No pude consultar ahora. Intentá de nuevo.";
-    return (data.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("\n")||"Sin respuesta.";
+    return data.reply || "No pude consultar ahora. Intentá de nuevo.";
   } catch { return "Error de conexión."; }
 }
 
